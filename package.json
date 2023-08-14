@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "npx husky install",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "migrations": "node src/db/postgres/migrations/exec.js"
   },
   "keywords": [],
   "author": "Leonan Fernando Orth",
