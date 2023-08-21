@@ -4,10 +4,12 @@ import express from 'express'
 import { PostgresHelper } from './src/db/postgres/helper.js'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
-app.get('/', async (req, res) => {
-  const results = await PostgresHelper.query('SELECT * FROM users')
+app.use(express.json())
+
+app.get('/api/users', async (req, res) => {
+  const results = await PostgresHelper.query('SELECT * FROM users;')
 
   res.send(JSON.stringify(results))
 })
