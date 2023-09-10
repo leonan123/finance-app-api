@@ -1,14 +1,16 @@
 import { EmailAlreadyInUseError } from '../errors/user.js'
 import { UpdateUserUseCase } from '../use-cases/update-user.js'
-import { badRequest, ok, serverError } from './helpers/http.js'
 import {
+  badRequest,
   checkIfEmailIsValid,
   checkIfIdIsValid,
   checkIfPasswordIsValid,
   invalidEmailResponse,
   invalidIdResponse,
   invalidPasswordResponse,
-} from './helpers/user.js'
+  ok,
+  serverError,
+} from './helpers/index.js'
 
 export class UpdateUserController {
   async execute(httpRequest) {
@@ -23,7 +25,9 @@ export class UpdateUserController {
       const params = httpRequest.body
 
       const allowedFields = ['first_name', 'last_name', 'email', 'password']
-      const someFieldsIsNotAllowed = Object.keys(params).some((field) => !allowedFields.includes(field))
+      const someFieldsIsNotAllowed = Object.keys(params).some(
+        (field) => !allowedFields.includes(field),
+      )
 
       if (someFieldsIsNotAllowed) {
         return badRequest({
@@ -32,8 +36,8 @@ export class UpdateUserController {
       }
 
       if (params.password) {
-        const passwordIsNotValid = checkIfPasswordIsValid(params.password)
-        if (passwordIsNotValid) {
+        const passwordIsValid = checkIfPasswordIsValid(params.password)
+        if (!passwordIsValid) {
           return invalidPasswordResponse()
         }
       }
