@@ -12,6 +12,8 @@ import { GetUserByIdUseCase } from './src/use-cases/get-user-by-id.js'
 import { PostgresCreateUserRepository } from './src/repositories/postgres/create-user.js'
 import { CreateUserUseCase } from './src/use-cases/create-user.js'
 import { PostgresGetUserByEmailRepository } from './src/repositories/postgres/get-user-by-email.js'
+import { PostgresUpdateUserRepository } from './src/repositories/postgres/update-user.js'
+import { UpdateUserUseCase } from './src/use-cases/update-user.js'
 
 const app = express()
 const port = process.env.PORT
@@ -43,7 +45,14 @@ app.post('/api/users', async (req, res) => {
 })
 
 app.patch('/api/users/:userId', async (req, res) => {
-  const updateUserController = new UpdateUserController()
+  const getUserByEmailRepository = new PostgresGetUserByEmailRepository()
+  const updateUserRepository = new PostgresUpdateUserRepository()
+  const updateUserUseCase = new UpdateUserUseCase(
+    updateUserRepository,
+    getUserByEmailRepository,
+  )
+  const updateUserController = new UpdateUserController(updateUserUseCase)
+
   const { statusCode, body } = await updateUserController.execute(req)
 
   res.status(statusCode).json(body)
