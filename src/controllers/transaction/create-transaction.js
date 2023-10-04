@@ -16,15 +16,15 @@ export class CreateTransactionController {
   async execute(httpRequest) {
     try {
       const params = httpRequest.body
-      const requiredFields = ['id', 'user_id', 'name', 'amount', 'type', 'date']
+      const requiredFields = ['userId', 'name', 'amount', 'type', 'date']
 
       for (const field of requiredFields) {
-        if (!params[field] || params[field].trim().length === 0) {
+        if (!params[field] || params[field].toString().trim().length === 0) {
           return badRequest({ message: `Missing param: ${field}` })
         }
       }
 
-      const userIdIsValid = checkIfIdIsValid(params.user_id)
+      const userIdIsValid = checkIfIdIsValid(params.userId)
 
       if (!userIdIsValid) {
         return invalidIdResponse()
