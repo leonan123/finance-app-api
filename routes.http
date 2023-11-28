@@ -1,0 +1,34 @@
+# @name get-users
+GET http://localhost:3000/api/users
+
+###
+
+# @name post-user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "first_name": "Michael",
+  "last_name": "Doe",
+  "email": "aBc7D@example.com",
+  "password": "password"
+}
+
+###
+
+# @name get-transactions
+GET http://localhost:3000/api/transactions
+
+###
+
+# @name post-transaction
+POST http://localhost:3000/api/transactions
+Content-Type: application/json
+
+{
+  "userId": "13e6c3e7-91be-446b-ac6e-938de7a8fa65",
+  "name": "Savings",
+  "amount": 1000.00,
+  "type": "EARNING",
+  "date": "2023-11-27"
+}
