@@ -19,7 +19,7 @@ export const checkIfIsString = (value) => typeof value === 'string'
  * and the fields that are missing.
  */
 export const validateRequiredFields = (params, requiredFields) => {
-  const someFieldsIsNotAllowed = requiredFields.map((field) => {
+  const someFieldsIsNotAllowed = requiredFields.filter((field) => {
     const fieldIsMissing = !params[field]
     const fieldIsEmpty =
       checkIfIsString(params[field]) && validator.isEmpty(params[field])
@@ -29,7 +29,12 @@ export const validateRequiredFields = (params, requiredFields) => {
     }
   })
 
-  if (someFieldsIsNotAllowed) {
+  console.log(
+    '🚀 ~ file: validation.js:32 ~ validateRequiredFields ~ if:',
+    someFieldsIsNotAllowed,
+  )
+
+  if (someFieldsIsNotAllowed.length) {
     return {
       ok: false,
       missingFields: someFieldsIsNotAllowed,
