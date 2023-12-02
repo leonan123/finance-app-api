@@ -7,7 +7,6 @@ export class GetTransactionsByUserIdUseCase {
   }
 
   async execute(userId) {
-    //TODO: validar id do usuário
     const user = await this.getUserByIdRepository.execute(userId)
 
     if (!user) {
