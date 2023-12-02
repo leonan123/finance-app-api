@@ -8,6 +8,12 @@ export const invalidIdResponse = () =>
     message: 'Provided id is not a valid UUID!',
   })
 
+export const requiredFieldsIsMissingResponse = (missingFields) => {
+  return badRequest({
+    message: 'Missing required fields: ' + missingFields.join(', '),
+  })
+}
+
 export const checkIfIsString = (value) => typeof value === 'string'
 
 /**
@@ -28,11 +34,6 @@ export const validateRequiredFields = (params, requiredFields) => {
       return field
     }
   })
-
-  console.log(
-    '🚀 ~ file: validation.js:32 ~ validateRequiredFields ~ if:',
-    someFieldsIsNotAllowed,
-  )
 
   if (someFieldsIsNotAllowed.length) {
     return {

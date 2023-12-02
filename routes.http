@@ -8,9 +8,9 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "first_name": "Kleber",
-  "last_name": "Doe",
-  "email": "74j23@example.com",
+  "first_name": "Kleber 3",
+  "last_name": "Doe43",
+  "email": "74j24343@example.com",
   "password": "password"
 }
 
@@ -32,3 +32,9 @@ Content-Type: application/json
   "type": "EARNING",
   "date": "2023-11-27"
 }
+
+# {
+#   "userId": "eb21cfd4-3628-4af2-9bca-42f32ea9af66",
+#   "type": "EARNING",
+#   "date": "2023-11-27"
+# }
