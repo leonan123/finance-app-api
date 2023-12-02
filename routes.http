@@ -35,6 +35,8 @@ Content-Type: application/json
 
 # {
 #   "userId": "eb21cfd4-3628-4af2-9bca-42f32ea9af66",
-#   "type": "EARNING",
+#   "type": "A",
+#   "amount": 1000.00,
+#   "name": "Salário",
 #   "date": "2023-11-27"
 # }
