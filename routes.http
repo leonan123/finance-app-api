@@ -16,8 +16,8 @@ Content-Type: application/json
 
 ###
 
-# @name get-transactions
-GET http://localhost:3000/api/transactions
+# @name get-transactions-by-user-id
+GET http://localhost:3000/api/transactions?userId=eb21cfd4-3628-4af2-9bca-42f32ea9af66
 
 ###
 
