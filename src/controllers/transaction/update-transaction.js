@@ -17,17 +17,18 @@ export class UpdateTransactionController {
 
   async execute(httpRequest) {
     try {
-      const params = httpRequest.body
-
-      const idIsValid = checkIfIdIsValid(params.transactionId)
+      const transactionId = httpRequest.params.transactionId
+      const idIsValid = checkIfIdIsValid(transactionId)
 
       if (!idIsValid) {
         return invalidIdResponse()
       }
 
+      const updateTransactionParams = httpRequest.body
+
       const allowedFields = ['name', 'date', 'amount', 'type']
 
-      const someFieldsIsNotAllowed = Object.keys(params).some(
+      const someFieldsIsNotAllowed = Object.keys(updateTransactionParams).some(
         (field) => !allowedFields.includes(field),
       )
 
@@ -37,15 +38,17 @@ export class UpdateTransactionController {
         })
       }
 
-      if (params.amount) {
-        const amountIsValid = checkIfAmountIsValid(params.amount)
+      if (updateTransactionParams.amount) {
+        const amountIsValid = checkIfAmountIsValid(
+          updateTransactionParams.amount,
+        )
         if (!amountIsValid) {
           return invalidAmountResponse()
         }
       }
 
-      if (params.type) {
-        const typeIsValid = checkIfTypeIsValid(params.type)
+      if (updateTransactionParams.type) {
+        const typeIsValid = checkIfTypeIsValid(updateTransactionParams.type)
 
         if (!typeIsValid) {
           return invalidTypeResponse()
@@ -53,8 +56,8 @@ export class UpdateTransactionController {
       }
 
       const updatedTransaction = await this.updateTransactionUseCase.execute(
-        params.transactionId,
-        params,
+        transactionId,
+        updateTransactionParams,
       )
 
       return ok(updatedTransaction)

@@ -56,7 +56,7 @@ export class UpdateUserController {
 
       return ok(updatedUser)
     } catch (error) {
-      console.log(error)
+      console.error(error)
 
       if (error instanceof EmailAlreadyInUseError) {
         return badRequest({ message: error.message })

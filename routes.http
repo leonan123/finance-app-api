@@ -33,10 +33,15 @@ Content-Type: application/json
   "date": "2023-11-27"
 }
 
-# {
-#   "userId": "eb21cfd4-3628-4af2-9bca-42f32ea9af66",
-#   "type": "A",
-#   "amount": 1000.00,
-#   "name": "Salário",
-#   "date": "2023-11-27"
-# }
+###
+
+# @name update-transactions
+PATCH http://localhost:3000/api/transactions/8858077b-b76f-4c23-9d34-63c5e9a22859
+Content-Type: application/json
+
+{
+  "name": "Atualizado",
+  "amount": 20.00,
+  "type": "EXPENSE",
+  "date": "2023-11-21"
+}
