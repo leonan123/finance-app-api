@@ -1,5 +1,5 @@
 import validator from 'validator'
-import { badRequest } from './http.js'
+import { badRequest, notFound } from './http.js'
 
 export const invalidAmountResponse = () => {
   return badRequest({
@@ -10,6 +10,12 @@ export const invalidAmountResponse = () => {
 export const invalidTypeResponse = () => {
   return badRequest({
     message: 'Type must be EARNING, EXPENSE or INVESTMENT',
+  })
+}
+
+export const transactionNotFoundResponse = () => {
+  return notFound({
+    message: 'Transaction not found!',
   })
 }
 

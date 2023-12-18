@@ -45,3 +45,9 @@ Content-Type: application/json
   "type": "EXPENSE",
   "date": "2023-11-21"
 }
+
+###
+
+# @name delete-transaction
+DELETE http://localhost:3000/api/transactions/8858077b-b76f-4c23-9d34-63c5e9a22859
+Content-Type: application/json
