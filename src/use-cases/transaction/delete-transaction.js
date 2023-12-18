@@ -5,7 +5,7 @@ export class DeleteTransactionUseCase {
 
   async execute(transactionId) {
     const transactionDeleted =
-      await this.deleteTransactionRepository(transactionId)
+      await this.deleteTransactionRepository.execute(transactionId)
 
     return transactionDeleted
   }
