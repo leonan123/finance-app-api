@@ -18,7 +18,7 @@ const port = process.env.PORT
 
 app.use(express.json())
 
-// **** TRANSACTIONS ****
+// **** USERS ****
 
 app.get('/api/users/:userId', async (req, res) => {
   const getUserByIdController = makeGetUserByIdController()
