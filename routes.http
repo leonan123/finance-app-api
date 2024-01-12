@@ -16,6 +16,11 @@ Content-Type: application/json
 
 ###
 
+# @name get-user-balance
+GET http://localhost:3000/api/users/eb21cfd4-3628-4af2-9bca-42f32ea9af66/balance
+
+###
+
 # @name get-transactions-by-user-id
 GET http://localhost:3000/api/transactions?userId=eb21cfd4-3628-4af2-9bca-42f32ea9af66
 
