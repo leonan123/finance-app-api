@@ -8,10 +8,20 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "first_name": "Leonan",
+  "first_name": "Leonan 2",
   "last_name": "Orth",
-  "email": "leonan@example.com",
-  "password": "43d"
+  "email": "leonantreste@example.com",
+  "password": "teste123456"
+}
+
+###
+
+# @name update-user
+PATCH http://localhost:3000/api/users/93ca0d5a-eb4d-44ab-8d95-ce252ab9bfc8
+Content-Type: application/json
+
+{
+  "first_name": "Atualizado"
 }
 
 ###

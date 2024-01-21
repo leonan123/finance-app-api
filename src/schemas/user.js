@@ -44,3 +44,30 @@ export const createUserSchema = z.object({
     })
     .max(255),
 })
+
+export const updateUserSchema = createUserSchema
+  .partial()
+  .extend({
+    user_id: z.string().trim().uuid({
+      message: 'Provided id is not a valid UUID!',
+    }),
+  })
+  .strict({
+    message: 'Some provided field is not allowed!',
+  })
+  .refine(
+    (data) => {
+      const params = Object.keys(data).filter((key) => key !== 'user_id')
+
+      if (Object.keys(params).length === 0) {
+        return false
+      }
+
+      return true
+    },
+    {
+      message: 'At least one field must be provided!',
+      path: [],
+      type: 'invalid_type',
+    },
+  )
