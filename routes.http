@@ -1,5 +1,5 @@
 # @name get-users
-GET http://localhost:3000/api/users
+GET http://localhost:3000/api/users/93ca0d5a-eb4d-44ab-8d95-ce252ab9bfc8
 
 ###
 
@@ -8,10 +8,10 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "first_name": "Kleber 3",
-  "last_name": "Doe43",
-  "email": "74j24343@example.com",
-  "password": "password"
+  "first_name": "Leonan",
+  "last_name": "Orth",
+  "email": "leonan@example.com",
+  "password": "43d"
 }
 
 ###

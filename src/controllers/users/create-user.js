@@ -1,15 +1,6 @@
 import { EmailAlreadyInUseError } from '../../errors/user.js'
-import {
-  badRequest,
-  checkIfEmailIsValid,
-  checkIfPasswordIsValid,
-  created,
-  invalidEmailResponse,
-  invalidPasswordResponse,
-  requiredFieldsIsMissingResponse,
-  serverError,
-  validateRequiredFields,
-} from '../helpers/index.js'
+import { createUserSchema } from '../../schemas/user.js'
+import { badRequest, created, serverError } from '../helpers/index.js'
 
 export class CreateUserController {
   constructor(createUserUseCase) {
@@ -19,25 +10,11 @@ export class CreateUserController {
   async execute(httpRequest) {
     try {
       const params = httpRequest.body
-      const requiredFields = ['first_name', 'last_name', 'email', 'password']
 
-      const { ok: requiredFieldsWereProvided, missingFields } =
-        validateRequiredFields(params, requiredFields)
+      const { success, error } = await createUserSchema.safeParseAsync(params)
 
-      if (!requiredFieldsWereProvided) {
-        return requiredFieldsIsMissingResponse(missingFields)
-      }
-
-      const passwordIsValid = checkIfPasswordIsValid(params.password)
-
-      if (!passwordIsValid) {
-        return invalidPasswordResponse()
-      }
-
-      const emailIsValid = checkIfEmailIsValid(params.email)
-
-      if (!emailIsValid) {
-        return invalidEmailResponse()
+      if (!success) {
+        return badRequest({ message: error.issues[0].message })
       }
 
       const createdUser = await this.createUserUseCase.execute(params)
