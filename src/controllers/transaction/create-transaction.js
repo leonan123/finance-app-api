@@ -1,18 +1,5 @@
-import {
-  checkIfIdIsValid,
-  created,
-  invalidIdResponse,
-  requiredFieldsIsMissingResponse,
-  serverError,
-  validateRequiredFields,
-} from '../helpers/index.js'
-
-import {
-  checkIfAmountIsValid,
-  checkIfTypeIsValid,
-  invalidAmountResponse,
-  invalidTypeResponse,
-} from '../helpers/transaction.js'
+import { createTransactionSchema } from '../../schemas/transaction.js'
+import { badRequest, created, serverError } from '../helpers/index.js'
 
 export class CreateTransactionController {
   constructor(createTransactionUseCase) {
@@ -22,38 +9,15 @@ export class CreateTransactionController {
   async execute(httpRequest) {
     try {
       const params = httpRequest.body
-      const requiredFields = ['userId', 'name', 'amount', 'type', 'date']
 
-      const { ok: requiredFieldsWereProvided, missingFields } =
-        validateRequiredFields(params, requiredFields)
+      const { success, error } =
+        await createTransactionSchema.safeParseAsync(params)
 
-      if (!requiredFieldsWereProvided) {
-        return requiredFieldsIsMissingResponse(missingFields)
+      if (!success) {
+        return badRequest({ message: error.issues[0].message })
       }
 
-      const userIdIsValid = checkIfIdIsValid(params.userId)
-
-      if (!userIdIsValid) {
-        return invalidIdResponse()
-      }
-
-      const amountIsValid = checkIfAmountIsValid(params.amount)
-
-      if (!amountIsValid) {
-        return invalidAmountResponse()
-      }
-
-      const type = params.type.trim().toUpperCase()
-      const typeIsValid = checkIfTypeIsValid(type)
-
-      if (!typeIsValid) {
-        return invalidTypeResponse()
-      }
-
-      const transaction = await this.createTransactionUseCase.execute({
-        ...params,
-        type,
-      })
+      const transaction = await this.createTransactionUseCase.execute(params)
 
       return created(transaction)
     } catch (error) {

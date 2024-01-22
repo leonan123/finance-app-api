@@ -27,12 +27,12 @@ Content-Type: application/json
 ###
 
 # @name get-user-balance
-GET http://localhost:3000/api/users/eb21cfd4-3628-4af2-9bca-42f32ea9af66/balance
+GET http://localhost:3000/api/users/93ca0d5a-eb4d-44ab-8d95-ce252ab9bfc8/balance
 
 ###
 
 # @name get-transactions-by-user-id
-GET http://localhost:3000/api/transactions?userId=eb21cfd4-3628-4af2-9bca-42f32ea9af66
+GET http://localhost:3000/api/transactions?userId=93ca0d5a-eb4d-44ab-8d95-ce252ab9bfc8
 
 ###
 
@@ -41,11 +41,11 @@ POST http://localhost:3000/api/transactions
 Content-Type: application/json
 
 {
-  "userId": "eb21cfd4-3628-4af2-9bca-42f32ea9af66",
-  "name": "Salário",
-  "amount": 1000.00,
-  "type": "EARNING",
-  "date": "2023-11-27"
+  "user_id": "93ca0d5a-eb4d-44ab-8d95-ce252ab9bfc8",
+  "name": "Salário teste 231",
+  "amount": 23.31,
+  "type": "EXPENSE",
+  "date": "2024-01-22T01:30:40.554Z"
 }
 
 ###

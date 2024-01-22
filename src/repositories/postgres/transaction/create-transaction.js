@@ -7,7 +7,7 @@ export class PostgresCreateTransactionRepository {
         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
       [
         createTransactionParams.id,
-        createTransactionParams.userId,
+        createTransactionParams.user_id,
         createTransactionParams.name,
         createTransactionParams.date,
         createTransactionParams.amount,
